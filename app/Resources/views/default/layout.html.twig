@@ -1,0 +1,27 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<title>{% block titre %}Animaux{% endblock %}</title>
+</head>
+<body>
+	<div id="navigation">
+		{% block navigation %}
+			<hr />
+				<a href="{{ path ('exo_pets_homepage') }} ">accueil </a>
+				{{ render(controller ("ExoPetsBundle:Default:navigation")) }}
+			<hr />
+		{% endblock %}
+	</div>
+	<div id="contenu">
+		<h1>Gestion des Animaux</h1>
+		{% block contenu %}
+		
+		{% endblock %}
+	</div>
+	<hr />
+	<div id="pied_de_page">
+		<p>&copye; DF.</p>
+	</div>
+</body>
+</html>

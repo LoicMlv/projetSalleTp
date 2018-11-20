@@ -1,0 +1,19 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Accueil</title>
+</head>
+<body>
+	<img src="/images/apple-touch-icon.png" />
+	<h1>Salle {{ numero }}: </h1>
+	<p>
+		Voici quelques informatons concernant la salle numéro : {{ numero }} <br\>	
+		blablabla blablabla blablabla blablabla blablabla ....
+	</p>
+		<p> lien vers <a href="{{ path ('salle_tp_voir', { 'numero': numero+1}) }}">
+		la suivante</a></p>
+		<p> lien vers <a href="{{ path ('salle_tp_voir', { 'numero': numero-1}) }}">
+		la précédente</a></p>
+		<p> lien vers  <a href="{{ path ('salle_tp_accueil') }} "> l'accueil</a></p>
+</body>
+</html>

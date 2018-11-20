@@ -1,0 +1,56 @@
+salle_tp_homepage:
+    path:     /
+    defaults: { _controller: SalleTpBundle:Default:index }
+
+salle_tp_accueil:
+    path:     /accueil
+    defaults: { _controller: SalleTpBundle:Salle:accueil }
+
+salle_tp_voir:
+    path:     /voir/{numero}
+    defaults: { _controller: SalleTpBundle:Salle:voir }
+    requirements:
+       numero:   \d{1,9} 
+
+salle_tp_dix:
+    path:     /dix
+    defaults: { _controller: SalleTpBundle:Salle:dix }
+
+salle_tp_treize:
+    path:     /treize
+    defaults: { _controller: SalleTpBundle:Salle:treize }
+
+salle_tp_treize_bis:
+    path:     /treizebis
+    defaults: { _controller: SalleTpBundle:Salle:treize_bis }
+
+salle_tp_voir2:
+    path:     /voir2/{id}
+    defaults: { _controller: SalleTpBundle:Salle:voir2 }
+    requirements:
+        id: \d+
+
+salle_tp_ajouter:
+    path:     /ajouter/{batiment}-{etage}.{numero}
+    defaults: { _controller: SalleTpBundle:Salle:ajouter }
+    requirements:
+        batiment: A|B|C|D
+        etage: \d
+        numero: \d{1,2}
+
+salle_tp_ajouter2:
+    path:     /ajouter2
+    defaults: { _controller: SalleTpBundle:Salle:ajouter2 }
+    
+salle_tp_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: SalleTpBundle:Salle:modifier }
+    requirements:
+      id: \d+
+        
+salle_tp_modifier_suite:
+    path:     /modifierSuite/{id}
+    defaults: { _controller: SalleTpBundle:Salle:modifierSuite }
+    requirements:
+      _method: POST
+

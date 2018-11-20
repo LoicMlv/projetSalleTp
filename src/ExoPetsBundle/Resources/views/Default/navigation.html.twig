@@ -1,0 +1,4 @@
+{% for animal in animal %}
+- <a href="{{ path('exo_pets_voir', { 'id': animal.id }) }} ">
+	{{ animal.nom }} - {{ animal.poids }}.{{ animal.dateNais }} </a>
+{% endfor %}

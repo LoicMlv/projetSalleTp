@@ -1,0 +1,17 @@
+exo_pets:
+    resource: "@ExoPetsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+exo1:
+    resource: "@Exo1Bundle/Resources/config/routing.yml"
+    prefix:   /exo1
+
+salle_tp:
+    resource: "@SalleTpBundle/Resources/config/routing.yml"
+    prefix:   /salle
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+

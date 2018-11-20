@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animal</title>
+	</head>
+	<body>
+		<ul>
+			<li> Nom : {{ animal.nom }} </li>
+			<li> Poids : {{ animal.poids }} </li>
+			<li> Date de naissance : {{ animal.dateNais }} </li>
+		</ul>
+	</body>
+</html>

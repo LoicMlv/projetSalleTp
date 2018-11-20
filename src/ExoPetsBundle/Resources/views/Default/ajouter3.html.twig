@@ -1,0 +1,10 @@
+{% extends "default/layout.html.twig" %}
+
+{% block titre %}
+	Ajout - {{ parent() }}
+{% endblock %}
+
+{% block contenu %}
+	<h2>Ajouter un animal </h2>
+		{% include "@ExoPets/Default/formulaire.html.twig" %}
+{% endblock %}

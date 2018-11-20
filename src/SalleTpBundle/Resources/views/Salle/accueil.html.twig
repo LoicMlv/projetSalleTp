@@ -1,0 +1,17 @@
+{% extends "Salle/layout.html.twig" %}
+
+{% block titre %}
+	Accueil - {{ parent() }}
+{% endblock %}
+{% block salleTP_contenu %}
+	<h2>Accueil: </h2>
+	<p><i>page visitee {{ nbreFois }} fois.</i></p>
+	<ul> message:
+		{# affichage de message flash s'il y a #}
+		{% for message in app.session.flashbag.get('infoAjout') %}
+			<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	<p>Voir la salle <a href="{{ path('salle_tp_voir2', { 'id':3}) }}">3</a></p>
+	<p><a href="{{ path('salle_tp_ajouter2') }}">Ajouter une salle</a></p>
+{% endblock %}

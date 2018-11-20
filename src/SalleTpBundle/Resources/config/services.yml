@@ -1,0 +1,4 @@
+services:
+#    salle_tp.example:
+#        class: SalleTpBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,16 @@
+exo1_accueil:
+    path:     /
+    defaults: { _controller: Exo1Bundle:Exo:accueil }
+exo1_nombre:
+    path:     /nombre/{numero}
+    defaults: { _controller: Exo1Bundle:Exo:nombre }
+exo1_addition:
+    path:     /addition/{numero1}/{numero2}
+    defaults: { _controller: Exo1Bundle:Exo:addition}
+    requirements:
+       numero1,numero2: \d{1,9}
+exo1_quotient:
+    path:     /quotient/{numero1}/{numero2}
+    defaults: { _controller: Exo1Bundle:Exo:quotient }
+    requirements:
+       numero1, numero2: \d{1,9}

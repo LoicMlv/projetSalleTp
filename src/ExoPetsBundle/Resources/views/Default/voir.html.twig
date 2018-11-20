@@ -1,0 +1,13 @@
+{% extends "default/layout.html.twig" %}
+
+{% block titre %}
+	Voir - {{ parent() }}
+{% endblock %}
+{% block contenu %}
+	<h2>Animal</h2>
+	<ul>
+		<li> Nom : {{ animal.nom }} </li>
+		<li> Poids : {{ animal.poids }} </li>
+		<li> Date de naissance : {{ animal.dateNais }} </li>
+	</ul>
+{% endblock %}

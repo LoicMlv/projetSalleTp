@@ -1,0 +1,19 @@
+SalleTpBundle\Entity\Salle:
+    type: entity
+    table: null
+    repositoryClass: SalleTpBundle\Repository\SalleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        batiment:
+            type: string
+            length: 255
+        etage:
+            type: smallint
+        numero:
+            type: smallint
+    lifecycleCallbacks: {  }
