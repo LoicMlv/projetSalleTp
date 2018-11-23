@@ -29,4 +29,21 @@ class SalleRepository extends \Doctrine\ORM\EntityRepository
 		$q = $this->getEntityManager()->createQuery("UPDATE SalleTpBundle:Salle s SET s.numero = s.numero+'1'");
 		$result =$q->execute();
 	}
+	
+	public function testGetResult(){
+		$qB = $this->createQueryBuilder('s');
+		$qB->where("s.batiment = 'D'");
+		$q = $qB->getQuery();
+		$result = $q->getResult();
+		return $result; 
+	}
+
+	public function testGSSR(){
+		$qB = $this->createQueryBuilder('s');
+		$qB->select('COUNT(s)');
+		$qB->where("s.batiment = 'D'");
+		$q = $qB->getQuery();
+		$result = $q->getSingleScalarResult();
+		return $result; 
+	}
 }

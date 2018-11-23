@@ -1,18 +1,20 @@
 <?php
 
 namespace SalleTpBundle\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Salle
  *
  * @ORM\Table(name="salle")
  * @ORM\Entity(repositoryClass="SalleTpBundle\Repository\SalleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Salle
 {
+    
+
     /**
      * @var int
      *
@@ -26,7 +28,8 @@ class Salle
      * @var string
      *
      * @ORM\Column(name="batiment", type="string", length=255)
-     * @Assert\Length( min=1, max=1, exactMessage= "Votre nom doit faire {{ limit }} caractère")
+     * 
+     * @Assert\Length( min=1, max=1, exactMessage="Votre nom doit faire {{ limit }} caractère")
      */
     private $batiment;
 
@@ -34,16 +37,17 @@ class Salle
      * @var int
      *
      * @ORM\Column(name="etage", type="smallint")
-     * @Assert\Regex( pattern="/^[0-9]$/", message="La valeur doit être comprise entre 0 et 9.")
+     * @Assert\Regex(pattern="/^[0-9]$/", message="la valeur doit être comprise entre 0 et 9.")
      */
+    
     private $etage;
 
     /**
      * @var int
      *
      * @ORM\Column(name="numero", type="smallint")
-     * @Assert\Regex( pattern="/^[0-9]+$/", message="La valeur doit être numérique.")
-     * @Assert\LessThan( value=80, message="La valeur est inférieure ou égale à 80.")
+     * @Assert\Regex( pattern="/^[0-9]+$/", message="la valeur doit être numérique.")
+     * @Assert\LessThan( value=80, message="valeurinférieure ou égale à 80")
      */
     private $numero;
 
@@ -129,13 +133,16 @@ class Salle
     {
         return $this->numero;
     }
-
     public function __toString() {
     	return $this->getBatiment().'-'.$this->getEtage().'.'.$this->getNumero();
     }
-    
 
-    
-
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function corrigeNomBatiment() {
+        $this->batiment = strtoupper($this->batiment);
+    }
 }
 

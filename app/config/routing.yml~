@@ -1,14 +1,10 @@
-exo_pets:
-    resource: "@ExoPetsBundle/Resources/config/routing.yml"
-    prefix:   /
-
 exo1:
     resource: "@Exo1Bundle/Resources/config/routing.yml"
-    prefix:   /exo
+    prefix:   /exo/
 
 salle_tp:
     resource: "@SalleTpBundle/Resources/config/routing.yml"
-    prefix:   /salle/
+    prefix:   /
 
 app:
     resource: '@AppBundle/Controller/'
