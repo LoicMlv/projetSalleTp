@@ -5,6 +5,7 @@ namespace SalleTpBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use SalleTpBundle\Entity\Salle;
+use Doctrine\Common\Util\Debug ;
 
 class EssaiController extends Controller
 {
@@ -78,5 +79,62 @@ class EssaiController extends Controller
 		$result .= 'find('.$id.') '.$repositorySalle->find($id).'<br />';
 		$result .= 'contains(salle):'.$em->contains($salle).'<br />';
 		return new Response('<html><body>'.$result.'</body></html>'); 
+	}
+
+	public function test6Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salle = $repository->find(1);
+		var_dump($salle);
+		echo '<br/>';
+		Debug::dump($salle);
+		return new Response('<html><body></body></html>'); 
+	}
+
+	public function test7Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findAll();
+		return $this->render('@SalleTp/Salle/liste.html.twig',array('salles' => $salles)); 
+	}
+
+	public function test8Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findBy(array('etage' => 1),array('numero' =>'asc'));
+		return $this->render('@SalleTp/Salle/liste.html.twig',array('salles' => $salles)); 
+	}
+
+	public function test9Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findOneBy(array('etage' => 1));
+		return new Response("<html><body>$salles</body></html>"); 
+	}
+
+	public function test10Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findByBatiment('D');
+		return $this->render('@SalleTp/Salle/liste.html.twig',array('salles' => $salles)); 
+	}
+
+	public function test11Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findOneByBatiment('D');
+		return new Response("<html><body>$salles</body></html>"); 
+	}
+
+	public function test12Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->findBE('D', 6);
+		return $this->render('@SalleTp/Salle/liste.html.twig',array('salles' => $salles)); 
+	}
+
+	public function test13Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->salleAouB();
+		return $this->render('@SalleTp/Salle/liste.html.twig',array('salles' => $salles)); 
+	}
+
+	public function test14Action(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('SalleTpBundle:Salle');
+		$salles = $repository->plusUnEtage();
+		return new Response('<html><body><a href="http://10.1.16.236/phpmyadmin"> voir phpmyadmin </a></body></html>'); 
 	}
 }

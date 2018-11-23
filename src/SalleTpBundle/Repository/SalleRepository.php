@@ -10,4 +10,23 @@ namespace SalleTpBundle\Repository;
  */
 class SalleRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findBE($batiment, $etage) {
+		$queryBuilder = $this->createQueryBuilder('s');
+		$queryBuilder->where('s.batiment = :batiment')
+			->setParameter('batiment', $batiment)
+			->andWhere('s.etage <= :etage')
+			->setParameter('etage', $etage)
+			->orderBy('s.etage', 'asc');
+		return $queryBuilder->getQuery()->getResult();	
+	}
+	
+	public function salleAouB() {
+		$query= $this->getEntityManager()->createQuery("SELECT s FROM SalleTpBundle:Salle s where s.batiment IN ('A', 'D')");
+		return $query->getResult();
+	}
+
+	public function plusUnEtage() {
+		$q = $this->getEntityManager()->createQuery("UPDATE SalleTpBundle:Salle s SET s.numero = s.numero+'1'");
+		$result =$q->execute();
+	}
 }
