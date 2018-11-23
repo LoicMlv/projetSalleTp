@@ -53,4 +53,6 @@ salle_tp_modifier_suite:
     defaults: { _controller: SalleTpBundle:Salle:modifierSuite }
     requirements:
       _method: POST
-
+salle_tp_test_chap3et4:
+    resource: "@SalleTpBundle/Resources/config/routingTestChap3et4.yml"
+    prefix: /essai 
