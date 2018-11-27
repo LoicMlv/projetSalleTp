@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="animal")
  * @ORM\Entity(repositoryClass="ExoPetsBundle\Repository\AnimalRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Animal
 {
@@ -76,6 +77,14 @@ class Animal
     public function getNom()
     {
         return $this->nom;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function corrigeNom() {
+        $this->nom = ucfirst(strtolower($this->nom));
     }
 
     /**
