@@ -12,15 +12,15 @@ class OrdinateurController extends Controller
     public function listerAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $ordis = $em->getRepository('SalleTpBundle\Form\OrdinateurType')->findAll();
+        $ordis = $em->getRepository('SalleTpBundle:Ordinateur')->findAll();
         return $this->render('@SalleTp/Ordinateur/lister.html.twig', ['ordinateurs' => $ordis]);
     }
 
     public function ajouterAction(Request $request)
     {
         $ordi = new Ordinateur();
-        //$form = $this->createForm('SalleTpBundle\Form\OrdinateurType', $ordi);
-        $form = $this->createForm('SalleTpBundle\Form\OrdinateurType2', $ordi);
+        //$form = $this->createForm('SalleTpBundle\Form\OrdinateurType', $ordi); // Pour avoir toutes les salles
+        $form = $this->createForm('SalleTpBundle\Form\OrdinateurType2', $ordi); // Pour avoir toutes les salles dont l'étage est inférieur ou égale à 1
         $form->add('submit', SubmitType::class, ['label' => 'Ajouter']);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
