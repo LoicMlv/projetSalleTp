@@ -20,7 +20,8 @@ class OrdinateurController extends Controller
     {
         $ordi = new Ordinateur();
         //$form = $this->createForm('SalleTpBundle\Form\OrdinateurType', $ordi); // Pour avoir toutes les salles
-        $form = $this->createForm('SalleTpBundle\Form\OrdinateurType2', $ordi); // Pour avoir toutes les salles dont l'étage est inférieur ou égale à 1
+        //$form = $this->createForm('SalleTpBundle\Form\OrdinateurType2', $ordi); Pour avoir toutes les salles dont l'étage est inférieur ou égale à 1
+        $form = $this->createForm('SalleTpBundle\Form\OrdinateurType3',$ordi);
         $form->add('submit', SubmitType::class, ['label' => 'Ajouter']);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
