@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Salle
 {
-    
+    /**
+     * @ORM\OneToMany(targetEntity="SalleTpBundle\Entity\Ordinateur", mappedBy="salle", cascade={"persist"})
+     */
+    private $ordinateur;
 
     /**
      * @var int
@@ -144,5 +147,45 @@ class Salle
     public function corrigeNomBatiment() {
         $this->batiment = strtoupper($this->batiment);
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordinateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add ordinateur
+     *
+     * @param \SalleTpBundle\Entity\Ordinateur $ordinateur
+     *
+     * @return Salle
+     */
+    public function addOrdinateur(\SalleTpBundle\Entity\Ordinateur $ordinateur)
+    {
+        $this->ordinateur[] = $ordinateur;
+        $ordinateur->setSalle($this);
+        return $this;
+    }
+
+    /**
+     * Remove ordinateur
+     *
+     * @param \SalleTpBundle\Entity\Ordinateur $ordinateur
+     */
+    public function removeOrdinateur(\SalleTpBundle\Entity\Ordinateur $ordinateur)
+    {
+        $this->ordinateur->removeElement($ordinateur);
+    }
+
+    /**
+     * Get ordinateur
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdinateur()
+    {
+        return $this->ordinateur;
+    }
+}
