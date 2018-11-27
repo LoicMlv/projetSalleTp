@@ -284,4 +284,60 @@ class EssaiController extends Controller
             $result .= $ordi->getIp();
         return new Response('<html><body>'.$result.'</body></html>');
     }
+
+    public function test34Action(){
+        $em = $this->getDoctrine()->getManager();
+        $repositoryOrdi = $em->getRepository('SalleTpBundle:Ordinateur');
+        $ordi = $repositoryOrdi->findOneByNumero(808);
+        $em->remove($ordi);
+        $em->flush();
+        return new Response('<html><body></body></html>');
+    }
+
+    public function test35Action(){
+        $em = $this->getDoctrine()->getManager();
+        $repOrdi = $em->getRepository('SalleTpBundle:Ordinateur');
+        $ordi = new Ordinateur();
+        $ordi->setNumero(901)
+            ->setIp('192.168.9.01');
+        $salle = new Salle();
+        $salle->setBatiment('D')
+            ->setEtage(9)
+            ->setNumero(01);
+        $ordi->setSalle($salle);
+        $em->persist($ordi);
+        $em->flush();
+        $idOrdi = $ordi->getId();
+        $em->remove($ordi->getSalle());
+        $em->flush();
+        return new Response('<html><body></body></html>');
+    }
+
+    public function test37Action(){
+        $em = $this->getDoctrine()->getManager();
+        $salle = new Salle();
+        $salle->setBatiment('D')
+            ->setNumero(04)
+            ->setEtage(9);
+        $ordi1 = new Ordinateur();
+        $ordi1->setNumero(904)
+            ->setIp('192.168.9.04');
+        $em->persist($ordi1);
+        $ordi1->setSalle($salle);
+        $ordi2 = new Ordinateur();
+        $ordi2->setNumero(905)
+            ->setIp('192.168.9.05');
+        $em->persist($ordi2);
+        $ordi2->setSalle($salle);
+        $em->flush();
+        $idSalle = $salle->getId();
+        $em->flush();
+        $em->clear();
+
+        $repositorySalle = $em->getRepository('SalleTpBundle:Salle');
+        $salle = $repositorySalle->find($idSalle);
+        $em->remove($salle);
+        $em->flush();
+        return new Response('<html><body>rechercher la salle D-9.04 puis les ordis 904 et 905 avec PHPMyAdmin</body></html>');
+    }
 }
