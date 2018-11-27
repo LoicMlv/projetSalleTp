@@ -45,3 +45,7 @@ exo_pets_maitre_voir:
 exo_pets_maitre_del:
     path: /pets/maitre/delete/{id}
     defaults: { _controller: ExoPetsBundle:Default:del }
+
+exo_pets_maitre_ajouterAM:
+    path: /pets/maitre/ajouter
+    defaults: { _controller: ExoPetsBundle:Default:addAM }

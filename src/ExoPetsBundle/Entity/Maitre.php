@@ -107,4 +107,8 @@ class Maitre
     {
         return $this->animal;
     }
+
+    public function __toString() {
+        return $this->getNom();
+    }
 }

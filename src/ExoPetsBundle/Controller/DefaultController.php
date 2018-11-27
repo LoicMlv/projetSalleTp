@@ -165,4 +165,20 @@ class DefaultController extends Controller
         $em->flush();
         return new Response('<html><body>Le maître numéro '.$id.' ainsi que ces animaux, ont été delete</body></html>');
     }
+
+    public function addAMAction(Request $request){
+        $animal = new Animal();
+        $form = $this->createForm('ExoPetsBundle\Form\AnimalType2', $animal);
+        $form->add('submit',SubmitType::class, ['label' => 'Ajouter']);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $now = (new \DateTime("now"));
+            $animal->setDateNais($now);
+            $em->persist($animal);
+            $em->flush();
+            return $this->redirectToRoute('exo_pets_homepage');
+        }
+        return $this->render('@ExoPets/Default/ajouterAM.html.twig', ['form' => $form->createView()]);
+    }
 }
