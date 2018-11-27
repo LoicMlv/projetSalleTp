@@ -78,20 +78,45 @@ class DefaultController extends Controller
 		return $this->render('@ExoPets/Default/ajouter3.html.twig', array('monFormulaire' => $form->createView()));
 	}
 
-	public function modifierAction($id) {
-		$em = $this->
-		$form = $this->createForm(AnimalType::class, $animal, array('action' => $this->generateUrl('exo_pets_modifier')));
-		$form->add('submit', SubmitType::class, array ('label' => 'Ajouter'));
-		$form->handleRequest($request);
-		
-		if($form->isSubmitted() && $form->isValid()){
-			$now = (new \DateTime("now"));
-			$animal->setDateNais($now);
-			$entityManager = $this->getDoctrine()->getManager();
-			$entityManager->persist($animal);
-			$entityManager->flush();
-			return $this->redirectToRoute('exo_pets_voir', array('id' => $animal->getId()));
-		}
-		return $this->render('@ExoPets/Default/ajouter3.html.twig', array('monFormulaire' => $form->createView()));
-	}
+//	public function modifierAction($id) {
+//		$em = $this->$this->getDoctrine()->getManager();
+//		$form = $this->createForm(AnimalType::class, $animal, array('action' => $this->generateUrl('exo_pets_modifier')));
+//		$form->add('submit', SubmitType::class, array ('label' => 'Ajouter'));
+//		$form->handleRequest($request);
+//
+//		if($form->isSubmitted() && $form->isValid()){
+//			$now = (new \DateTime("now"));
+//			$animal->setDateNais($now);
+//			$entityManager = $this->getDoctrine()->getManager();
+//			$entityManager->persist($animal);
+//			$entityManager->flush();
+//			return $this->redirectToRoute('exo_pets_voir', array('id' => $animal->getId()));
+//		}
+//		return $this->render('@ExoPets/Default/ajouter3.html.twig', array('monFormulaire' => $form->createView()));
+//	}
+
+    public function updateAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $animal = $em->getRepository('ExoPetsBundle:Animal')->find($id);
+        $form = $this->createForm(AnimalType::class, $animal);
+        $form->add('submit',SubmitType::class, ['label' => 'Modifier']);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $now = (new \DateTime("now"));
+            $animal->setDateNais($now);
+            $em->persist($animal);
+            $em->flush();
+            return $this->redirectToRoute('exo_pets_voir', ['id' => $animal->getId()]);
+        }
+        return $this->render('@ExoPets/Default/modifier.html.twig', ['monFormulaire' => $form->createView(), 'id' => $id]);
+    }
+
+    public function deleteAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $animal = $em->getRepository('ExoPetsBundle:Animal')->find($id);
+        $em->remove($animal);
+        $em->flush();
+        return $this->redirectToRoute('exo_pets_homepage');
+    }
 }

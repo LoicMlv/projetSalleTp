@@ -1,11 +1,11 @@
 exo_pets_homepage:
-    path:     /pets/animal/tous
+    path:     /pets/all
     defaults: { _controller: ExoPetsBundle:Default:index }
 exo_pets_voir:
-    path:    /achat/client/voir/{id}
+    path:    /pets/voir/{id}
     defaults: { _controller: ExoPetsBundle:Default:voir }
 exo_pets_ajouter:
-    path:     /ajouter/{nom}/{poids}
+    path:     /pets/ajouter/{nom}/{poids}
     defaults: { _controller: ExoPetsBundle:Default:ajouter }
 exo_pets_ajouter2:
     path:     /pets/animal/ajouter
@@ -14,4 +14,11 @@ exo_pets_ajouter3:
     path:     /pets/animal/ajouter3
     defaults: { _controller: ExoPetsBundle:Default:ajouter3 }
 
+exo_pets_update:
+    path: /pets/update/{id}
+    defaults: { _controller: ExoPetsBundle:Default:update }
+
+exo_pets_delete:
+    path: /pets/delete/{id}
+    defaults: { _controller: ExoPetsBundle:Default:delete }
 
