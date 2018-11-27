@@ -15,6 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Animal
 {
     /**
+     * @ORM\ManyToOne(targetEntity="ExoPetsBundle\Entity\Maitre", inversedBy="animal", cascade={"persist"})
+     */
+    private $maitre;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -137,5 +142,28 @@ class Animal
     }
 
 
-}
 
+    /**
+     * Set maitre
+     *
+     * @param \ExoPetsBundle\Entity\Maitre $maitre
+     *
+     * @return Animal
+     */
+    public function setMaitre(\ExoPetsBundle\Entity\Maitre $maitre = null)
+    {
+        $this->maitre = $maitre;
+
+        return $this;
+    }
+
+    /**
+     * Get maitre
+     *
+     * @return \ExoPetsBundle\Entity\Maitre
+     */
+    public function getMaitre()
+    {
+        return $this->maitre;
+    }
+}

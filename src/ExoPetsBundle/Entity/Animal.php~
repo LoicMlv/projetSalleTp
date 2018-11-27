@@ -10,9 +10,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="animal")
  * @ORM\Entity(repositoryClass="ExoPetsBundle\Repository\AnimalRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Animal
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="ExoPetsBundle\Entity\Maitre", inversedBy="animal", cascade={"persist"})
+     */
+    private $maitre;
+
     /**
      * @var int
      *
@@ -79,6 +85,14 @@ class Animal
     }
 
     /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function corrigeNom() {
+        $this->nom = ucfirst(strtolower($this->nom));
+    }
+
+    /**
      * Set poids
      *
      * @param integer $poids
@@ -111,7 +125,7 @@ class Animal
      */
     public function setDateNais($dateNais)
     {
-        $this->dateNais = $dateNais;
+        $this->dateNais = new \DateTime("now");
 
         return $this;
     }
@@ -129,4 +143,3 @@ class Animal
 
 
 }
-

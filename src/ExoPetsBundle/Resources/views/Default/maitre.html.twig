@@ -1,0 +1,17 @@
+{% extends "default/layout.html.twig" %}
+
+{% block titre %}
+    Maitre - {{ parent() }}
+{% endblock %}
+{% block contenu %}
+    <h2>Les animaux du maitre</h2>
+
+        <h5> Nom du maitre : {{ maitre.nom }} </h5>
+        {% for animal in maitre.animal %}
+    <ul>
+        <li> Nom : {{ animal.nom }} </li>
+        <li> Poids : {{ animal.poids }} </li>
+        <li> Date de naissance : {{ animal.dateNais }} </li>
+    </ul>
+    {% endfor %}
+{% endblock %}

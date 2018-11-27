@@ -3,6 +3,7 @@
 namespace ExoPetsBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
+use ExoPetsBundle\Entity\Maitre;
 use ExoPetsBundle\Form\AnimalType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -148,5 +149,14 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
         $repository->doubler();
         return $this->redirectToRoute('exo_pets_homepage');
+    }
+
+    public function voirToutAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $maitre = $em->getRepository('ExoPetsBundle:Maitre')->find($id);
+//        Debug::dump($maitre);
+//        return new Response('<html><body></body></html>');
+        return $this->render('@ExoPets/Default/maitre.html.twig', ['maitre' => $maitre]);
+
     }
 }

@@ -37,3 +37,7 @@ exo_pets_poidsmin:
 exo_pets_doubler:
     path: /pets/double
     defaults: { _controller: ExoPetsBundle:Default:doubler }
+
+exo_pets_maitre:
+    path: /pets/maitre/voirTout/{id}
+    defaults: { _controller: ExoPetsBundle:Default:voirTout }
