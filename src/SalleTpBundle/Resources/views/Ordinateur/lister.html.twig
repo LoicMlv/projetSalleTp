@@ -1,0 +1,13 @@
+{% extends "Salle/layout.html.twig" %}
+
+{% block titre %}Liste ordinateur {{ parent() }}{% endblock %}
+
+{% block salleTp_contenu %}
+<h2>Liste des ordinateurs</h2>
+    <ul>
+        {% for ordinateur in ordinateurs %}
+            <li>numéro: {{ ordinateur.numero }}, ip: {{ ordinateur.ip }}, salle: {{ ordinateur.salle.batiment }}-{{ ordinateur.salle.etage }}.{{ ordinateur.salle.numero }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('ajouter') }}">Ajouter un ordinateur</a>
+{% endblock %}

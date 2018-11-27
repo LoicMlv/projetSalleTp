@@ -56,3 +56,11 @@ salle_tp_modifier_suite:
 salle_tp_test_chap3et4:
     resource: "@SalleTpBundle/Resources/config/routingTestChap3et4.yml"
     prefix: /essai 
+
+lister:
+    path:     /ordi/lister
+    defaults: { _controller: SalleTpBundle:Ordinateur:lister }
+
+ajouter:
+    path:     /ordi/ajouter
+    defaults: { _controller: SalleTpBundle:Ordinateur:ajouter }
