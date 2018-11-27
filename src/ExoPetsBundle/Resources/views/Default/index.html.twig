@@ -5,4 +5,7 @@
 {% endblock %}
 {% block contenu %}
 	<h2>Accueil: </h2>
+		{% for animal in animals %}
+	<p>Nom: {{ animal.nom }}, Poids: {{ animal.poids }}, Date de naissance: {{ animal.datenais }}</p>
+	{% endfor %}
 {% endblock %}

@@ -22,3 +22,18 @@ exo_pets_delete:
     path: /pets/delete/{id}
     defaults: { _controller: ExoPetsBundle:Default:delete }
 
+exo_pets_findLourd:
+    path: /pets/lourd/{poids}
+    defaults: { _controller: ExoPetsBundle:Default:lourd }
+
+exo_pets_substring:
+    path: /pets/souschaine/{souschaine}
+    defaults: { _controller: ExoPetsBundle:Default:substring }
+
+exo_pets_poidsmin:
+    path: /pets/poidsmin
+    defaults: { _controller: ExoPetsBundle:Default:poidsmin }
+
+exo_pets_doubler:
+    path: /pets/double
+    defaults: { _controller: ExoPetsBundle:Default:doubler }

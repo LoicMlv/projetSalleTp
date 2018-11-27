@@ -2,7 +2,9 @@
 
 namespace ExoPetsBundle\Controller;
 
+use Doctrine\Common\Util\Debug;
 use ExoPetsBundle\Form\AnimalType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ExoPetsBundle\Entity\Animal;
@@ -14,7 +16,9 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-    	return $this->render('@ExoPets/Default/index.html.twig');
+        $repo = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+        $animal = $repo->findAll();
+    	return $this->render('@ExoPets/Default/index.html.twig', ['animals' => $animal]);
     }
 
 	public function ajouterAction($nom, $poids) {
@@ -117,6 +121,32 @@ class DefaultController extends Controller
         $animal = $em->getRepository('ExoPetsBundle:Animal')->find($id);
         $em->remove($animal);
         $em->flush();
+        return $this->redirectToRoute('exo_pets_homepage');
+    }
+
+    public function substringAction($souschaine){
+        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+        $result = $repository->findByNomApproximatif($souschaine);
+        return $this->render('@ExoPets/Default/vue.html.twig', ['result' => $result]);
+    }
+
+    public function lourdAction($poids){
+        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+        $result = $repository->findAnimalLourd($poids);
+        return $this->render('@ExoPets/Default/vue.html.twig', ['result' => $result]);
+    }
+
+//    public function poidsminAction(){
+//        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+//        $result = $repository->findCPoidsMin();
+//        Debug::dump($result);
+//        return new Response('<html><body></body></html>');
+//        return $this->render('@ExoPets/Default/vue.html.twig', ['result' => $result]);
+//    }
+
+    public function doublerAction(){
+        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+        $repository->doubler();
         return $this->redirectToRoute('exo_pets_homepage');
     }
 }
