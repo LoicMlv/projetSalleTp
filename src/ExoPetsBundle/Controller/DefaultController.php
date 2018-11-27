@@ -154,9 +154,15 @@ class DefaultController extends Controller
     public function voirToutAction($id){
         $em = $this->getDoctrine()->getManager();
         $maitre = $em->getRepository('ExoPetsBundle:Maitre')->find($id);
-//        Debug::dump($maitre);
-//        return new Response('<html><body></body></html>');
         return $this->render('@ExoPets/Default/maitre.html.twig', ['maitre' => $maitre]);
+    }
 
+    public function delAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $repositoryMaitre = $em->getRepository('ExoPetsBundle:Maitre');
+        $maitre = $repositoryMaitre->find($id);
+        $em->remove($maitre);
+        $em->flush();
+        return new Response('<html><body>Le maître numéro '.$id.' ainsi que ces animaux, ont été delete</body></html>');
     }
 }

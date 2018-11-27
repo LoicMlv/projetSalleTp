@@ -16,6 +16,7 @@ class Animal
 {
     /**
      * @ORM\ManyToOne(targetEntity="ExoPetsBundle\Entity\Maitre", inversedBy="animal", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $maitre;
 

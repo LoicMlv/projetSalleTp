@@ -38,6 +38,10 @@ exo_pets_doubler:
     path: /pets/double
     defaults: { _controller: ExoPetsBundle:Default:doubler }
 
-exo_pets_maitre:
+exo_pets_maitre_voir:
     path: /pets/maitre/voirTout/{id}
     defaults: { _controller: ExoPetsBundle:Default:voirTout }
+
+exo_pets_maitre_del:
+    path: /pets/maitre/delete/{id}
+    defaults: { _controller: ExoPetsBundle:Default:del }
