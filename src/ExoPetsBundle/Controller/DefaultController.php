@@ -137,13 +137,11 @@ class DefaultController extends Controller
         return $this->render('@ExoPets/Default/vue.html.twig', ['result' => $result]);
     }
 
-//    public function poidsminAction(){
-//        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
-//        $result = $repository->findCPoidsMin();
-//        Debug::dump($result);
-//        return new Response('<html><body></body></html>');
-//        return $this->render('@ExoPets/Default/vue.html.twig', ['result' => $result]);
-//    }
+    public function poidsminAction(){
+        $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');
+        $result = $repository->findCPoidsMin();
+        return $this->render('@ExoPets/Default/poidsmin.html.twig', ['result' => $result]);
+    }
 
     public function doublerAction(){
         $repository = $this->getDoctrine()->getManager()->getRepository('ExoPetsBundle:Animal');

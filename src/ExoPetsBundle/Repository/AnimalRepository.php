@@ -27,12 +27,13 @@ class AnimalRepository extends \Doctrine\ORM\EntityRepository
         return $qB->getQuery()->getResult();
     }
 
-//    public function findCPoidsMin(){
-//        $qB = $this->createQueryBuilder('a');
-//        $qB->select('MIN(a)')
-//            ->groupBy('a.nom');
-//        return $qB->getQuery()->getResult();
-//    }
+    public function findCPoidsMin(){
+        $qB = $this->createQueryBuilder('a');
+        $qB->select('a')
+            ->orderBy('a.poids', 'asc')
+            ->setMaxResults(1);
+        return $qB->getQuery()->getResult();
+   }
 
     public function doubler(){
         $query = $this->getEntityManager()->createQuery("UPDATE ExoPetsBundle:Animal a SET a.poids = a.poids + a.poids");
